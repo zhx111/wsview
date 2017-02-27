@@ -1,0 +1,92 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+.quick-start-page{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	min-height: 600px;
+	background-color: #f7f7f7;
+}
+
+.start-page-top{
+	width: 100%;
+	height: 60px;
+	background-color: #eeecec;
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+.left-logo {
+	float: left;
+	font-size:24px;
+	font-weight: 700;
+	line-height: 60px;
+	margin-left:28px;
+}
+
+.start-page-content {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding-top: 108px;
+	text-align: center;
+}
+
+.quick-start-page .content-title{
+	font-size: 50px;
+	color: #4a4a4a;
+	line-height: 60px;
+	font-weight: 400;
+}
+
+.start-xml-main {
+	position: absolute;
+	top: 34%;
+	left: 50%;
+	width: 980px;
+	height: 50%;
+	margin-left: -490px;
+	border: 2px dashed #a9a9a9;
+	background-color: #fff;
+	-webkit-transition:all .4s ease;
+	transition: all .4s ease;
+}
+
+.start-xml-main:hover {
+	border-style: solid;
+	box-shadow: 0 16px 16px 0 rgba(0,0,0,.3);
+}
+
+.xml-main-msg{
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width: 800px;
+	height: 200px;
+	margin:-100px 0 0 -400px;
+}
+
+.xml-main-info{
+	font-size: 40px;
+	color: #8a898a;
+	font-weight: 100;
+}
+
+.select-xml>button {
+	border:1px solid #979797;
+	height: 36px;
+	line-height: 16px;
+	border-radius: 10px;
+	width: 140px;
+	color:#4a4a4a;
+	font-size: 16px;
+	background-color: #ededec;
+
+}

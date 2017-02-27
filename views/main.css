@@ -1,0 +1,25 @@
+body{
+	margin: 0 auto;
+	padding: 0 auto;
+	font-family: "微软雅黑";
+}
+
+.sidebar {
+	background-color: #1896df;
+	min-height: 600px;
+	width:250px;
+	color: #fff;
+	float: left;
+}
+
+.content {
+	margin-left: 260px;
+}
+
+.catalog {
+	list-style-type: none;
+}
+
+.catalog li {
+	margin-top: 20px;
+}

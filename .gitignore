@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+coverage
+logs
+.idea
+public/files

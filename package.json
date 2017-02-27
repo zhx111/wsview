@@ -1,0 +1,18 @@
+{
+  "name": "wsview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-busboy": "0.0.2",
+    "express": "^4.14.1",
+    "jade": "^1.11.0",
+    "xml2json": "^0.11.0"
+  }
+}

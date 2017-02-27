@@ -1,0 +1,35 @@
+html
+	head
+		title 文书可视化_全文
+		link(rel="stylesheet",type="text/css",href="static/css/main.css")
+	body
+		div.sidebar
+			div.sidebar-title
+				h2 文书可视化
+			ul.catalog
+				li(data-wsfilename="#{wsfilename}") #{writ.QW.nameCN}
+				- var catalog1 = Object.getOwnPropertyNames(writ.QW);
+				- var itemNum = catalog1.length>=9?9:catalog1.length;
+				- for(let i = 2;i<itemNum;i++){
+					li 
+						a(id="#{catalog1[i]}" href="javascript:void(0)") #{writ.QW[catalog1[i]].nameCN}
+				- }
+		div.content
+			div.content-title 全文
+			div.content-body
+				div.content-body-main
+					- for(let i = 0 ;i<xmlQWvalue.length;i++){
+					p #{xmlQWvalue[i]}
+					-}
+			div.node-info
+		script(
+			type="text/javascript"
+			src="static/js/jquery-1.12.1.min.js"
+		)
+		script(
+			type="text/javascript"
+			src="static/js/main.js"
+		)
+		
+			
+		

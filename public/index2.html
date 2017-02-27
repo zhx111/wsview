@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>文书可视化</title>
+	<link rel="stylesheet" type="text/css" href="css/index2.css">
+</head>
+<body>
+	<div class="root">
+		<div class="top-sidebar">
+			<div class="left-logo">文书可视化</div>
+		</div>
+		<div class="main-content">
+			<h2 class="content-title">欢迎使用文书可视化工具</h2>
+			<p class="xml-info">请选择一篇文书XML文件，进行上传</p>
+			<div id="thelist" class="uploader-list"></div>
+			<div class="upload-button">
+				<span class="upload-button-text" id="picker">上传</br>文件<span>
+			</div>
+			<form  id="jx" action="/wsjx" method="POST">
+			<input id="filename" name="filename" type="hidden"></input>
+			</form>
+			<div class="error-info">
+				<div class="error-info-container">
+					<div class="error-info-text">
+					</div>
+					<button type="button" name="konw">知道了</button>
+				</div>
+			</div>			
+		</div>
+		<footer>
+			<div class="bottom-info">
+				<div class="help"><img src="img/帮助.png" class="help-icon">帮助</div>
+				<div class="telephone"><img class="telephone-icon" src="img/电话.png"></img>电话</div>
+				<div class="e-mail"><img class="mail-icon" src="img/mail.png"></img>E-mail</div>
+			</div>
+		</footer>
+		<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript" src="js/webuploader/webuploader.min.js"></script>
+		<script type="text/javascript" src="js/upload.js"></script>
+	</div>									
+</body>
+</html>

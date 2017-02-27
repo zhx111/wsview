@@ -1,0 +1,186 @@
+body{
+	margin: 0 auto;
+	padding: 0 auto;
+	font-family: "微软雅黑";
+}
+
+.root{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	min-height: 600px;
+	background-color: #fff;
+}
+
+.top-sidebar{
+	width: 100%;
+	height: 60px;
+	background-color: #1896df;
+	border-bottom: 2px solid #46abe5;
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+.left-logo {
+	float: left;
+	font-size:24px;
+	font-weight: 700;
+	line-height: 60px;
+	margin-left:28px;
+	color: #fff;
+}
+
+.main-content {
+	background-color: #1896df;
+	padding-top: 50px;
+	text-align: center;
+	color: #fff;
+	height: 358px;
+	
+}
+
+.content-title {
+	font-size: 50px;
+	line-height: 60px;
+	font-weight: 400;
+}
+
+.xml-info{
+	font-size:24px;
+	line-height: 30px;
+}
+
+.upload-button {
+  border-radius: 50%;
+  background-color: rgb(255, 144, 0);
+  box-shadow: 0px 0px 8px 0px rgba(47, 27, 0, 0.2);
+  position: absolute;
+  left: 50%;
+  top: 400px;
+  margin-left: -74px;
+  width: 148px;
+  height: 148px;
+  z-index: 9;
+}
+
+
+
+.upload-button:hover {
+	background-color: #fd9e24;
+	box-shadow: 0px 0px 15px 0px rgba(47, 27, 0, 0.2);
+}
+
+.upload-button-text {
+	display: inline-block;
+	padding-top: 30px;
+	font-size: 40px;
+	line-height: 45px;
+	text-align: center;
+	color: #fff;
+    text-shadow: 1px 1.732px 2px rgba(114, 91, 0, 0.5);
+    z-index: 10;
+}
+
+footer{
+	position: absolute;
+	top: 468px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: #fff;
+	text-align: center;
+}
+
+.bottom-info {
+	position: absolute;
+	left: 50%;
+	margin-left: -30%;
+	background-color: #fff;
+	width: 60%;
+	margin-top: 150px;
+}
+
+.help,.telephone,.e-mail{
+	display: inline-block;
+	font-size: 20px;
+	color: rgb(24, 150, 223);
+    line-height: 2;
+}
+
+.help {
+	background-image: url(../img/帮助.png);
+	height: 80px;
+	width: 80px;
+}
+
+.telephone {
+	margin:0 120px;
+	
+	height: 80px;
+	width: 51px;
+}
+
+.e-mail {
+	
+	height: 80px;
+	width: 80px;
+}
+
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+
+.error-info {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 100;
+	background: rgba(0,0,0,0.6);
+}
+
+.error-info-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background: #f4f4f4;
+	opacity: 0.96;
+	z-index: 101;
+	width: 400px;
+	height: 300px;
+}
+
+.error-info-text {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-48%);
+	width: 400px;
+	margin-top: 100px;
+	color:#828282;
+	font-size: 1.2em;
+}
+
+.error-info-container > button {
+	margin-top: 170px;
+	border:0;
+	height: 36px;
+	width: 88px;
+	border-radius: 2px;
+	font-size: 12px;
+	background: rgb(244, 67, 54);
+	color: #fff;
+	cursor: pointer;
+}
+
+.error-info-container > button:hover {
+	background: #f25549;
+}
+
+
+
