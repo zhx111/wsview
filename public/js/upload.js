@@ -35,26 +35,26 @@ jQuery(function() {
 		});
 
 		// 文件上传过程中创建进度条实时显示。
-		uploader
-				.on(
-						'uploadProgress',
-						function(file, percentage) {
-							var $li = $('#' + file.id), $percent = $li
-									.find('.progress .progress-bar');
-						//	console.log(percentage);
-							// 避免重复创建
-							if (!$percent.length) {
-								$percent = $(
-										'<div class="progress progress-striped active">'
-												+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
-												+ '</div>' + '</div>')
-										.appendTo($li).find('.progress-bar');
-							}
+		// uploader
+		// 		.on(
+		// 				'uploadProgress',
+		// 				function(file, percentage) {
+		// 					var $li = $('#' + file.id), $percent = $li
+		// 							.find('.progress .progress-bar');
+		// 				//	console.log(percentage);
+		// 					// 避免重复创建
+		// 					if (!$percent.length) {
+		// 						$percent = $(
+		// 								'<div class="progress progress-striped active">'
+		// 										+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
+		// 										+ '</div>' + '</div>')
+		// 								.appendTo($li).find('.progress-bar');
+		// 					}
 
-							$li.find('p.state').text('上传中');
+		// 					$li.find('p.state').text('上传中');
 
-							$percent.css('width', percentage * 100 + '%');
-						});
+		// 					$percent.css('width', percentage * 100 + '%');
+		// 				});
 
 		uploader.on('uploadSuccess', function(file, response) {
 			//$('#' + file.id).find('p.state').text('已上传');
@@ -68,7 +68,7 @@ jQuery(function() {
 		});
 
 		uploader.on('uploadComplete', function(file) {
-			$('#' + file.id).find('.progress').fadeOut();
+			//$('#' + file.id).find('.progress').fadeOut();
 		});
 
 		uploader.on('all', function(type) {
@@ -113,6 +113,26 @@ jQuery(function() {
 				errorInfo.style.display = "none";
 			});
 		}
+
+		var haloContainer = document.getElementById('haloContainer');
+		function start(haloContainer,stateList){
+			var currentIndex = 0;
+
+			var intervalID = window.setInterval(function(){
+				var state = stateList[currentIndex];
+				haloContainer.className = state;
+				currentIndex = (currentIndex + 1) % stateList.length;
+			},800);
+			return intervalID;
+		}
+		var uploadButton = document.querySelector('.upload-button');
+		uploadButton.addEventListener('mouseenter',function(){
+			this.intervalID = start(haloContainer,['start','wait','stop']);
+		});
+		uploadButton.addEventListener('mouseleave',function(){
+			window.clearInterval(this.intervalID);
+			haloContainer.className = 'stop';
+		});
 	});
 
 

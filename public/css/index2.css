@@ -51,6 +51,38 @@ body{
 	line-height: 30px;
 }
 
+
+#innerhalo,#outerhalo {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%,0);
+	display: none;
+}
+
+#outerhalo {
+	top:320px;
+}
+
+#innerhalo {
+	top:365px;
+}
+
+#haloContainer.start img:nth-child(2){
+	display: block;
+}
+
+#haloContainer.start img:nth-child(1){
+	display: none;
+}
+
+#haloContainer.wait img{
+	display: block;
+}
+
+#haloContainer.stop img{
+	display: none;
+}
+
 .upload-button {
   border-radius: 50%;
   background-color: rgb(255, 144, 0);
