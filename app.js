@@ -109,8 +109,8 @@ app.use('/wsjx',function(req,res,next){
 });
 
 app.use('/ws',function(req,res,next){
-	//console.log(req.query.name);
-	//console.log(req.query.filename);
+	// console.log(req.query.name);
+	// console.log(req.query.filename);
 	var filename=req.query.filename;
 	var name = req.query.name;
 	fs.readFile(__dirname+'/public/files/'+filename,function(err,data){
@@ -120,7 +120,7 @@ app.use('/ws',function(req,res,next){
 		if(!xmlobject.writ&&xmlobject.QW){
 			xmlobject["writ"]={"QW":xmlobject.QW};
 		}
-		var catalogs=Object.getOwnPropertyNames(xmlobject.writ.QW);
+		var catalogs=Object.keys(xmlobject.writ.QW);
 		for (var i = 0; i < catalogs.length; i++) {
 			if (catalogs[i]===name) {
 				res.send(xmlobject.writ.QW[catalogs[i]]);

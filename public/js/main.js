@@ -1,10 +1,14 @@
-var xhr = new XMLHttpRequest();
+
 var catalogId=[];
-var filename = $('.catalog>li').data('wsfilename');
 
 var util = {
 	formatValue: function(value){
-		var valueArray = value.split(" ");
+		var valueArray;
+		if(value.indexOf('\n')!=-1){
+			valueArray = value.split('\n');
+		}else {
+			valueArray = value.split(" ");
+		}
 		if (valueArray[0]==="") {
 			valueArray.splice(0,1);
 		}
@@ -46,36 +50,52 @@ var util = {
 	}
 }
 
-$(".catalog li a").each(function(){
-	if ($(this).attr('id')) {
-		catalogId.push($(this).attr('id'));
+function sendMassage(url,filename,name){
+	var xhr = new XMLHttpRequest();
+	var url = url;
+	url = addURLParam.apply(null,[url,"filename",filename]);
+	url = addURLParam.apply(null,[url,"name",name]);
+	xhr.open('get',url,true);
+	xhr.send(null);
+	var xmlcontent = null;
+	xhr.onreadystatechange = function(){
+		if (xhr.readyState === 4) {
+			if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+				xmlcontent=eval("("+xhr.response+")");
+				setContent(xmlcontent);
+			}
+		}
 	}
-});
-
-for (var i = 0; i < catalogId.length; i++) {
-	(function(num){
-		$('#'+catalogId[num]).on('click',function(){
-			var url="/ws";
-			url = addURLParam(url,"filename",filename);
-			url = addURLParam(url,"name",catalogId[num]);
-			//console.log(url);
-			xhr.open('get',url,true);
-			xhr.send(null);
-			xhr.onreadystatechange = function(){
-				if (xhr.readyState == 4) {
-					if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
-						var xmlcontent=eval("("+xhr.response+")");
-						var partHtml = util.formatValue(xmlcontent.value);
-						$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div>"+"<div class='items-list'></div>");
-						$('.content-body-main').height(400);
-						renderSecondLevel(xmlcontent);
-					}
-				} 
-			};
-		});
-	}(i));
 	
 }
+
+function handleNav() {
+	var navArray = document.querySelectorAll('.catalog li a');
+	navArray.forEach(function(item,index){
+		var id = item.id;
+		var text = item.innerText;
+		item.addEventListener('click',function(){
+			setTitle(text);
+			var filename = $('.catalog>li').data('wsfilename');
+			sendMassage('/ws',filename,id);
+		},false);
+	});
+}
+
+function setContent(xmlcontent){
+	var partHtml = util.formatValue(xmlcontent.value);
+	$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div>"+"<div class='items-list'></div>");
+	$('.content-body-main').height(400);
+	renderSecondLevel(xmlcontent);
+}
+
+function setTitle(text){
+	var title = document.querySelector('.content-title');
+	title.firstElementChild.innerText = text;
+	return;
+}
+
+handleNav();
 
 function renderSecondLevel(xmlcontent) {
 	// body...

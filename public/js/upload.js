@@ -122,7 +122,7 @@ jQuery(function() {
 				var state = stateList[currentIndex];
 				haloContainer.className = state;
 				currentIndex = (currentIndex + 1) % stateList.length;
-			},800);
+			},600);
 			return intervalID;
 		}
 		var uploadButton = document.querySelector('.upload-button');
