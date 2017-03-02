@@ -1,7 +1,7 @@
 body{
 	margin: 0 auto;
 	padding: 0 auto;
-	font-family: "Helvetica Neue", Helvetica, Arial, pingfang sc, hiragino sans gb, microsoft yahei, sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "hiragino sans gb", "microsoft yahei", sans-serif;
 }
 
 nav {
@@ -85,13 +85,12 @@ nav {
 }
 
 .content-body{
-	height: 600px;
-	border:2px solid #aaa;
+	height: 722px;
+	border:1px solid #aaa;
 	overflow: scroll;
-	
 	position: relative;
 	width: 100%;
-
+	background-color: #eee;
 }
 
 .node-info {
@@ -162,25 +161,24 @@ nav {
 
 .prev,.next {
 	display: block;
-
     position: absolute;
-    top: 50%;
-
+    top: 40%;
     display: block;
-
     width: 20px;
     height: 20px;
     padding: 0;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
     transform: translate(0, -50%);
-
     cursor: pointer;
-
+    /*border:0;
+	font-size: 44px;
+	background: transparent;*/
 }
 
 .prev {
 	left: 0px;
+
 }
 
 .next {
@@ -188,7 +186,7 @@ nav {
 }
 
 .sub-level-item {
-	border:1px solid #666;
+	border-bottom:1px solid #666;
 	padding: 10px 10px;
 }
 
@@ -210,6 +208,29 @@ nav {
 	overflow: scroll;
 	padding: 5px 80px 0 80px;
 	width: calc(100% - 160px);
+	height: 600px;
+	background-color: #fff;
+}
+
+.content-body-main>p {
+	font-size: 18px;
+	color: #444;
+  	line-height: 1.667;
+  	text-indent: 36px;
+}
+
+.content-body-main.format-title p:nth-child(1),.content-body-main.format-title p:nth-child(3){
+	text-align: center;
+	color: rgb(153, 153, 153);
+	font-size: 18px;
+}
+
+.content-body-main.format-title p:nth-child(2){
+	text-align: center;
+	color:#000;
+	font-size: 36px;
+	font-weight: bolder;
+	line-height: 0.5em;
 }
 
 .content-node, .content-body-main {

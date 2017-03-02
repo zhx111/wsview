@@ -11,7 +11,7 @@ html
 				li(data-wsfilename="#{wsfilename}")  
 					<i class="fa fa-file-text-o" aria-hidden="true"></i> #{writ.QW.nameCN}
 				- var catalog1 = Object.keys(writ.QW);
-				- var itemNum = catalog1.length>=9?9:catalog1.length;
+				- var itemNum = catalog1.length>=9 ? 9 : catalog1.length;
 				- var icons = ['fa-sort-amount-asc','fa-users','fa-sticky-note-o','fa-book','fa-comments-o','fa-gavel','fa-sort-amount-asc fa-flip-vertical'];
 				- for(let i = 2;i<itemNum;i++){
 					li 
@@ -23,7 +23,7 @@ html
 				h2 全文
 				span(class="content-title-info") #{wsfilename}
 			div.content-body
-				div.content-body-main
+				div.content-body-main.format-title
 					- for(let i = 0 ;i<xmlQWvalue.length;i++){
 					p #{xmlQWvalue[i]}
 					-}

@@ -47,26 +47,32 @@ var util = {
 	},
 	matches: function(elem,selector){
 		return elem.matchesSelector(selector);
+	},
+	store: function(namespace,data) {
+		if (arguments.length > 1) {
+			return localStorage.setItem(namespace,data);
+		} else {
+			return localStorage.getItem(namespace) || [];
+		}
 	}
 }
 
 function sendMassage(url,filename,name){
 	var xhr = new XMLHttpRequest();
 	var url = url;
-	url = addURLParam.apply(null,[url,"filename",filename]);
-	url = addURLParam.apply(null,[url,"name",name]);
+	url = addURLParam.apply(null,[url,'filename',filename]);
+	url = addURLParam.apply(null,[url,'name',name]);
 	xhr.open('get',url,true);
 	xhr.send(null);
 	var xmlcontent = null;
 	xhr.onreadystatechange = function(){
 		if (xhr.readyState === 4) {
 			if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
-				xmlcontent=eval("("+xhr.response+")");
-				setContent(xmlcontent);
+				xmlcontent=eval('('+xhr.response+')');
+				setContent(xmlcontent,name);
 			}
 		}
 	}
-	
 }
 
 function handleNav() {
@@ -80,12 +86,25 @@ function handleNav() {
 			sendMassage('/ws',filename,id);
 		},false);
 	});
+	//单独处理全文节点
+	var qw = document.querySelector('.catalog>li');
+	var qwContent = document.querySelector('.content-body-main').innerHTML;
+	util.store('QW',qwContent);
+	qw.addEventListener('click',function(){
+		 setTitle('全文');
+		 $('.node-info').html('');
+		 $('.content-body').height(722).html('<div class="content-body-main format-title">'+util.store('QW')+'</div><div class="items-list"></div>');
+		 $('.content-body-main').height(600);
+	});
 }
 
-function setContent(xmlcontent){
+function setContent(xmlcontent,name){
 	var partHtml = util.formatValue(xmlcontent.value);
-	$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div>"+"<div class='items-list'></div>");
+	$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div><div class='items-list'></div>");
 	$('.content-body-main').height(400);
+	if (name === 'WS') {
+		$('.content-body-main').addClass('format-title');
+	}
 	renderSecondLevel(xmlcontent);
 }
 

@@ -89,10 +89,11 @@ app.use('/wsjx',function(req,res,next){
 		var xmlQWvalue;
 		if (xmlobject.writ.QW.value.indexOf('\n')!=-1) {
 			xmlQWvalue=xmlobject.writ.QW.value.split("\n");
-		}else if (xmlobject.writ.QW.value.indexOf(' ')!=-1) {
-			xmlQWvalue=xmlobject.writ.QW.value.split(" ");
 		}else {
-			xmlQWvalue=xmlobject.writ.QW.value;
+			xmlQWvalue=xmlobject.writ.QW.value.split(" ");
+		}
+		if (xmlQWvalue[0]==="") {
+			xmlQWvalue.splice(0,1);
 		}
 		xmlobject['xmlQWvalue']=xmlQWvalue;
 		//console.log(xmlQWvalue);
@@ -101,7 +102,6 @@ app.use('/wsjx',function(req,res,next){
 		res.render('main',xmlobject);
 		});
 	}else {
-
 		res.send(error);
 	}
 	
