@@ -117,7 +117,6 @@ function setTitle(text){
 handleNav();
 
 function renderSecondLevel(xmlcontent) {
-	// body...
 	//console.log(xmlcontent);
 	document.querySelector('.node-info').innerHTML='<div class="second-level"></div>';
 	var rootHook = document.querySelector('.second-level');
@@ -167,11 +166,13 @@ function renderSecondLevel(xmlcontent) {
 		}
 	}
 	//track的宽度为其子块div的宽度*数量
-	//console.log(listNum);
-	var trackWidth = listNum>0 ? listNum*144 : 0 ;
+	var trackWidth = listNum>0 ? listNum*140 : 0 ;
 	trackList.style.width=trackWidth+"px";
 	listNum = listNum>2 ? listNum : 0 ;
-	movebuttonListener(listNum,144);
+	//计算可见的子块div的数量,130为padding值
+	var secWidth = util.getComputedWidth(rootHook)-130;
+	var viewNum = (secWidth/140).toFixed(0);
+	movebuttonListener(listNum,140,viewNum);
 	secLevelListener(xmlcontent);
 }
 
@@ -184,11 +185,16 @@ function addURLParam(url,name,value) {
 
 function secLevelListener(xmlcontent){
 	$('.block-demo').on('click',function(){
+		var childs = this.parentNode.childNodes;
+		childs.forEach(function(item,index){
+			item.className = 'block-demo'; 
+		});
+		$(this).addClass('active');
+
+
 		var keyName = this.getAttribute("data-keyname");
 		var nameCN = this.getAttribute("data-namecn");
 		var value = this.getAttribute("data-value");
-		//console.log(this.getAttribute("data-namecn"));
-		//console.log(xmlcontent[keyName]);
 		renderNodeContent(nameCN,value,2);
 		if (hasSub(xmlcontent[keyName])) {
 			if (!document.querySelector('.sub-level')) {
@@ -218,24 +224,22 @@ function secLevelListener(xmlcontent){
 	});
 }
 
-function movebuttonListener(itemNum,moveDis){
+function movebuttonListener(itemNum,moveDis,viewNum){
 	$('.next').on('click',function(){
 	var track = document.querySelector('.track');
 	var initDis = track.style.transform.substring(11,track.style.transform.indexOf("p")) || 0;
-	//console.log(initDis);
 	var currentDis=initDis-moveDis;
-	if (initDis>(-moveDis*(itemNum-6))) {
+	//itemNum-viewNum得到隐藏的块的数量
+	if (initDis>(-moveDis*(itemNum-viewNum))) {
 		//track.style.cssText = "transform:translateX("+currentDis+"px);transition:transform 500ms";
 		track.style.webkitTransform = "translateX("+currentDis+"px)";
 		track.style.webkitTransition = "transform 500ms";
-	//console.log(track.style.getPropertyValue("transform"))
 	}
 	});
 
 	$('.prev').on('click',function(){
 		var track = document.querySelector('.track');
 		var initDis = track.style.transform.substring(11,track.style.transform.indexOf("p")) || 0;
-		//console.log(initDis);
 		var currentDis=initDis-(-moveDis);
 		if (initDis<0) {
 			//track.style.cssText = "transform:translateX("+currentDis+"px);transition:transform 500ms";
