@@ -54,6 +54,13 @@ var util = {
 		} else {
 			return localStorage.getItem(namespace) || [];
 		}
+	},
+	addActive:function(node){
+		var childs = node.parentNode.childNodes;
+		childs.forEach(function(item,index){
+			item.classList.remove('active');
+		});
+		node.classList.add('active');
 	}
 }
 
@@ -185,11 +192,8 @@ function addURLParam(url,name,value) {
 
 function secLevelListener(xmlcontent){
 	$('.block-demo').on('click',function(){
-		var childs = this.parentNode.childNodes;
-		childs.forEach(function(item,index){
-			item.className = 'block-demo'; 
-		});
-		$(this).addClass('active');
+		//给按钮增加active属性
+		util.addActive(this);
 
 
 		var keyName = this.getAttribute("data-keyname");
@@ -261,10 +265,11 @@ var subLevelClick=function(event){
 	if (event.target.nodeName==="SPAN") {
 			//拿到现有点击对象
 			var clickNode = event.target;
+			util.addActive(clickNode);
 			//获得该点击对象同一层级的所有节点
 			var clickNodeList = event.target.parentNode.parentNode.getElementsByTagName('span');
 			clickNodeList = Array.prototype.slice.call(clickNodeList);
-			//console.log(clickNodeList);
+			//同名节点，即name属性相同
 			var synonymNode = [];
 			var clickNodeIndex = 0;
 			for (var i = 0; i < clickNodeList.length; i++) {
@@ -277,29 +282,30 @@ var subLevelClick=function(event){
 					clickNodeIndex = i;
 				}
 			}
-			//console.log(synonymNode,clickNodeIndex);
+			//生成侧边弹出框
 			var clickName = event.target.getAttribute("name");
 			var clickLevel = event.target.parentNode.parentNode.getAttribute("data-level");
-			var clickSubLevel = parseInt(clickLevel)+1;
-			var subLevelDiv = document.querySelector('#level-'+clickSubLevel);
 			var value = event.target.getAttribute("value");
 			renderNodeContent(clickName,value,clickLevel);
+			//找到下一层节点
+			var clickSubLevel = parseInt(clickLevel)+1;
+			var subLevelDiv = document.querySelector('#level-'+clickSubLevel);
 			//判断点击对象是否有下一层节点
 			//console.log(subLevel.childNodes);
 			if(subLevelDiv) {
 				//将点击节点所有以下节点都隐藏
 				for (var j = clickLevel-2; j < subLevelChild.length; j++) {
-					subLevelChild[j].style.display = "none";
+					subLevelChild[j].style.display = 'none';
 				}
 				var count=0;
 				for (var i = 0; i < subLevelDiv.childNodes.length; i++) {
-					//console.log(subLevel.childNodes[i].getAttribute("data-fathername"));
-					subLevelDiv.childNodes[i].style.display="none";
-					var fatherName = subLevelDiv.childNodes[i].getAttribute("data-fathername");
+					subLevelDiv.childNodes[i].style.display='none';
+					subLevelDiv.childNodes[i].firstElementChild.classList.remove('active');
+					var fatherName = subLevelDiv.childNodes[i].getAttribute('data-fathername');
 					if (fatherName === clickName) {
 						if (count++ === clickNodeIndex) {
-							subLevelDiv.style.display = "block";
-							subLevelDiv.childNodes[i].style.display="block";
+							subLevelDiv.style.display = 'block';
+							subLevelDiv.childNodes[i].style.display='block';
 						}
 					}
 				}
@@ -337,10 +343,7 @@ function renderGrandChild(object,layer,name){
 			propdiv.appendChild(subdiv);
 		if (object instanceof Array) {
 			//数组的情况
-			//subdiv.setAttribute("data-fathername",object[0]["nameCN"]);
 			for (var i = 0; i < object.length; i++) {
-				//console.log(object[i]["nameCN"]);
-				//console.log("name:"+name);
 				var objectName=object[i]["nameCN"];
 				if (objectName===name) {
 					renderGrandChild(object[i],layer);
@@ -353,10 +356,6 @@ function renderGrandChild(object,layer,name){
 			//console.log(layer);
 			subdiv.setAttribute("data-fathername",object["nameCN"]);
 			var props = Object.keys(object);
-			 //console.log(props);
-			// if (object["value"]===undefined) {
-			// 	console.log("0:"+object[props[0]]+"1:"+object[props[1]]["nameCN"]);
-			// }
 			var i = object["value"]===undefined ? 1 : 2;
 			for ( i ; i < props.length; i++){
 				var subObject = object[props[i]];
@@ -469,6 +468,7 @@ function renderNextNodeContent(name,value,level,itemsList){
 
 	if (parseInt(level)===3) {
 		contentBodyMain.style.width = contentBodyWidth * 0.5-80;
+		contentBodyMain.style.left = 40;
 	}else if (parseInt(level)>3) {
 		contentBodyMain.style.width = contentBodyWidth * 0.5-100;
 	}
@@ -508,9 +508,6 @@ function setLeft(length,left,spaceWidth,position){
 	}
 	return positionArray[position];
 }
-
-
-
 
 function onHover(node){
 	node.addEventListener("mouseover",mainMouseenter,false);

@@ -222,12 +222,20 @@ nav {
 
 .sub-level-item>div span {
 	display: inline-block;
-	border:1px dotted #111;
 	margin: 5px 20px 5px 0px;
 	border-radius: 10px;
 	padding: 10px;
 	background-color: #74ccff;
 	color: #fff;
+	cursor:pointer;
+}
+
+.sub-level-item>div span:hover {
+	background-color: #67b7e5;
+}
+
+.sub-level-item>div span.active {
+	background-color:#1896df;
 }
 
 .items-list {
