@@ -114,18 +114,22 @@ nav {
 }
 
 .second-level {
-	padding: 10px 65px;
+	padding: 0px 65px;
 	border-bottom: 1px solid #c2c2c2; 
 	position: relative;
 	box-sizing: border-box;
 	width:100%;
 }
 
+.second-level.has-next {
+	border:none;
+}
+
 .block-demo {
 	width: 100px;
 	height: 100px;
 	float: left;
-	margin:5px 20px;
+	margin:15px 20px;
 	text-align: center;
 	border-radius: 50%;
 	position: relative;
@@ -144,6 +148,24 @@ nav {
 
 .block-demo:hover{
 	box-shadow: 1px 1px 8px 0 rgba(100,100,100,0.7);
+}
+
+.block-demo.active::after ,.block-demo.active::before{
+	content:' ';
+	border: 7px solid transparent;
+	border-bottom: 7px solid #ddd;
+	height: 0;
+	width: 0;
+	position: absolute;
+	bottom: -16px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 9999;
+}
+
+.block-demo.active::before {
+	border-bottom-color: #c2c2c2;
+	bottom: -15px;
 }
 
 .block-demo-content {
@@ -215,10 +237,21 @@ nav {
 	color: #eee;
 }
 
+.sub-level {
+	border-top: 1px solid #c2c2c2;
+	margin-top: -1px;
+}
+
 .sub-level-item {
 	border-bottom:1px solid #c2c2c2;
 	padding: 10px 10px;
 }
+
+.sub-level-item>div.hidden {
+	height: 50px;
+	overflow: scroll;
+}
+
 
 .sub-level-item>div span {
 	display: inline-block;

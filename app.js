@@ -38,7 +38,6 @@ app.post('/upload',function(req,res){
   				fs.close(fd,function(err){
   					if (err) {
        					return console.error(err);
-
    					}
    					console.log("文件关闭成功！");
   				});
@@ -47,7 +46,6 @@ app.post('/upload',function(req,res){
 			fileStream = fs.createWriteStream(__dirname+'/public/files/' + filename);
 			file.pipe(fileStream);
 			fileStream.on('close',function(){
-
 			});
 			file.on('data',function(chunk){
 				data+=chunk;
@@ -59,7 +57,6 @@ app.post('/upload',function(req,res){
 			file.on('error',function(err){
 				console.log(err.stack);
 			});
-
 		});
 	}
 	

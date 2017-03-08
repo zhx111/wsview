@@ -27,34 +27,12 @@ jQuery(function() {
 				uploader.removeFile(file,true);
 				showErrorType("formatError");
 			}else{
+				uploader.upload();
 				$("#filename").val(file.name);
 				$("#jx").submit();
-				uploader.upload();
 			}
 			//console.log(file);
 		});
-
-		// 文件上传过程中创建进度条实时显示。
-		// uploader
-		// 		.on(
-		// 				'uploadProgress',
-		// 				function(file, percentage) {
-		// 					var $li = $('#' + file.id), $percent = $li
-		// 							.find('.progress .progress-bar');
-		// 				//	console.log(percentage);
-		// 					// 避免重复创建
-		// 					if (!$percent.length) {
-		// 						$percent = $(
-		// 								'<div class="progress progress-striped active">'
-		// 										+ '<div class="progress-bar" role="progressbar" style="width: 0%">'
-		// 										+ '</div>' + '</div>')
-		// 								.appendTo($li).find('.progress-bar');
-		// 					}
-
-		// 					$li.find('p.state').text('上传中');
-
-		// 					$percent.css('width', percentage * 100 + '%');
-		// 				});
 
 		uploader.on('uploadSuccess', function(file, response) {
 			//$('#' + file.id).find('p.state').text('已上传');

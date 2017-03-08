@@ -194,12 +194,12 @@ function secLevelListener(xmlcontent){
 	$('.block-demo').on('click',function(){
 		//给按钮增加active属性
 		util.addActive(this);
-
-
+		//生成侧边弹出框
 		var keyName = this.getAttribute("data-keyname");
 		var nameCN = this.getAttribute("data-namecn");
 		var value = this.getAttribute("data-value");
 		renderNodeContent(nameCN,value,2);
+		//如果有子节点就生成
 		if (hasSub(xmlcontent[keyName])) {
 			if (!document.querySelector('.sub-level')) {
 				var sub = document.createElement('div');
@@ -211,6 +211,9 @@ function secLevelListener(xmlcontent){
 			}
 			renderGrandChild(xmlcontent[keyName],3,nameCN);
 			subLevelListener();
+			//给second-level加入has-next属性
+			var secLevel = document.querySelector('.second-level');
+			secLevel.classList.add('has-next');
 		}
 		//把三级以下的所有节点设为none
 		if (document.querySelector('.sub-level')) {
@@ -316,13 +319,13 @@ var subLevelClick=function(event){
 
 function hasSub(object){
 	var props = Object.keys(object);
-	if (props.length>2) {
+	if (props.length > 2) {
 		return true;
 	}else if (object instanceof Array) {
 		return true;
-	}else if (props.length==2&&props[1]!=="value"){
+	}else if (props.length == 2 && props[1]!=='value' && props[0] === 'nameCN') {
 	 	return true;
-	 }else{
+	 }else {
 		return false;
 	}
 }
@@ -331,15 +334,14 @@ function renderGrandChild(object,layer,name){
 	if (hasSub(object)) {
 		if (!document.querySelector('#level-'+layer)) {
 				var propdiv = document.createElement('div');
-				propdiv.setAttribute("id","level-"+layer);
-				propdiv.setAttribute("class","sub-level-item");
-				propdiv.setAttribute("data-level",layer);
-				propdiv.style.display="none";
+				propdiv.setAttribute('id','level-'+layer);
+				propdiv.setAttribute('class','sub-level-item');
+				propdiv.setAttribute('data-level',layer);
+				propdiv.style.display='none';
 			}else{
 				var propdiv = document.querySelector('#level-'+layer);
 			}
 			var subdiv = document.createElement('div');
-			//propdiv.firstChild ? propdiv.replaceChild(subdiv,propdiv.firstChild) : propdiv.appendChild(subdiv);
 			propdiv.appendChild(subdiv);
 		if (object instanceof Array) {
 			//数组的情况
@@ -348,12 +350,10 @@ function renderGrandChild(object,layer,name){
 				if (objectName===name) {
 					renderGrandChild(object[i],layer);
 				}
-				//renderGrandChild(object[i],layer);
 			}
 		}
 		else{
 			//对象的情况
-			//console.log(layer);
 			subdiv.setAttribute("data-fathername",object["nameCN"]);
 			var props = Object.keys(object);
 			var i = object["value"]===undefined ? 1 : 2;
@@ -401,7 +401,6 @@ function renderNodeContent(name,value,level){
 	} else {
 		var currentNode = itemsListChild[itemsListChild.length-1];
 		var currentLevel = currentNode.getAttribute('data-level');
-		//console.log(currentLevel+" "+level);
 		if (parseInt(currentLevel)===parseInt(level)) {
 			renderCurrentNodeContent(name,value,level,currentNode);
 		} else if (parseInt(currentLevel) < parseInt(level)) {
