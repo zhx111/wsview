@@ -29,7 +29,6 @@ jQuery(function() {
 			}else{
 				uploader.upload();
 				$("#filename").val(file.name);
-				$("#jx").submit();
 			}
 			//console.log(file);
 		});
@@ -38,6 +37,7 @@ jQuery(function() {
 			//$('#' + file.id).find('p.state').text('已上传');
 			wsnr=response;
 			console.log(wsnr);
+			$("#jx").submit();
 		});
 
 		uploader.on('uploadError', function(file, reason) {
