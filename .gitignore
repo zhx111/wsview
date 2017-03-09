@@ -3,6 +3,6 @@
 coverage
 logs
 .idea
-public/files/*.xml
+files/
 /node_modules
 
