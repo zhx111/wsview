@@ -3,6 +3,7 @@ var catalogId=[];
 
 var util = {
 	formatValue: function(value){
+		if (value === null) return;
 		var valueArray;
 		if(value.indexOf('\n')!=-1){
 			valueArray = value.split('\n');
@@ -21,6 +22,7 @@ var util = {
 		return value;
 	},
 	previousAll: function(node){
+		if (node === undefined) return;
 		var prevSibling = [];
 		while((node=node.previousSibling)!==null){
 			prevSibling.push(node);
@@ -28,6 +30,7 @@ var util = {
 		return prevSibling;
 	},
 	nextAll: function(node){
+		if (node === undefined) return;
 		var nextSibling = [];
 		while((node=node.nextSibling)!==null){
 			nextSibling.push(node);
@@ -41,6 +44,7 @@ var util = {
 		return value;
 	},
 	getComputedWidth: function(node){
+		if (node === undefined) return;
 		var width = document.defaultView.getComputedStyle(node,null).width;
 		width = parseInt(width);
 		return width;
@@ -56,6 +60,7 @@ var util = {
 		}
 	},
 	addActive:function(node){
+		if (node === undefined) return;
 		var childs = node.parentNode.childNodes;
 		childs.forEach(function(item,index){
 			item.classList.remove('active');
@@ -215,7 +220,7 @@ function secLevelListener(xmlcontent){
 			var secLevel = document.querySelector('.second-level');
 			secLevel.classList.add('has-next');
 		}
-		//把三级以下的所有节点设为none
+		//把三级以下的所有节点display设为none
 		if (document.querySelector('.sub-level')) {
 			var childNodes = document.querySelector('.sub-level').childNodes;
 			for (var i = 0; i < childNodes.length; i++) {
@@ -309,11 +314,47 @@ var subLevelClick=function(event){
 						if (count++ === clickNodeIndex) {
 							subLevelDiv.style.display = 'block';
 							subLevelDiv.childNodes[i].style.display='block';
+							//生成缩略内容
+							if(collapse(subLevelDiv.childNodes[i])) i++;
+							
 						}
 					}
 				}
 			}
-			//console.log(event.target.getAttribute("name")+" "+event.target.getAttribute("value"));
+		}
+}
+function collapse(node){
+		if(node === undefined) return false;
+		var height = document.defaultView.getComputedStyle(node,null).height;
+		if (parseInt(height)>110 && !node.nextElementSibling.getAttribute('class')) {
+			node.style.maxHeight = 104+'px';
+			node.style.overflow = 'hidden';
+
+			//生成显示隐藏
+			var collapse = document.createElement('div');
+			collapse.setAttribute('class','collapse');
+			collapse.innerHTML = '<a href="#0" id="show">展开全部</a><a href="#0" id="hide">隐藏全部</a>';
+			node.nextElementSibling !== null ? node.parentNode.insertBefore(collapse,node.nextElementSibling) : node.parentNode.appendChild(collapse);
+			collapse.addEventListener('click',toggle,false);
+			return true;
+		}else if (node.nextElementSibling && node.nextElementSibling.getAttribute('class')) {
+			node.nextElementSibling.style.display = 'block';
+			return true;
+		}
+		else {
+			return false;
+		}
+
+		function toggle(e){
+			if (e.target.nodeName=== 'A') {
+				if (e.target.id==='show') {
+					e.currentTarget.previousSibling.style.maxHeight = '';
+					e.currentTarget.setAttribute('class','uncollapse');
+				} else {
+					e.currentTarget.previousElementSibling.style.maxHeight = 104+'px';
+					e.currentTarget.setAttribute('class','collapse');
+				}
+			}
 		}
 }
 
