@@ -70,21 +70,28 @@ var util = {
 }
 
 function sendMassage(url,filename,name){
-	var xhr = new XMLHttpRequest();
 	var url = url;
 	url = addURLParam.apply(null,[url,'filename',filename]);
 	url = addURLParam.apply(null,[url,'name',name]);
-	xhr.open('get',url,true);
-	xhr.send(null);
-	var xmlcontent = null;
-	xhr.onreadystatechange = function(){
-		if (xhr.readyState === 4) {
-			if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
-				xmlcontent=eval('('+xhr.response+')');
-				setContent(xmlcontent,name);
+
+	return new Promise(function(resolve,reject){
+		var xhr = new XMLHttpRequest();
+		xhr.open('get',url,true);
+		xhr.send(null);
+		var xmlcontent = null;
+		xhr.onreadystatechange = function(){
+			if (xhr.readyState === 4) {
+				if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+					xmlcontent=eval('('+xhr.response+')');
+					resolve(xmlcontent,name);
+				}else{
+					reject(new Error(this.statusText));
+				}
 			}
 		}
-	}
+	});
+	
+	
 }
 
 function handleNav() {
@@ -95,7 +102,7 @@ function handleNav() {
 		item.addEventListener('click',function(){
 			setTitle(text);
 			var filename = $('.catalog>li').data('wsfilename');
-			sendMassage('/ws',filename,id);
+			sendMassage('/ws',filename,id).then(setContent).catch(function(error){console.error(error)});
 		},false);
 	});
 	//单独处理全文节点
