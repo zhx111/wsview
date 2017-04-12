@@ -1,0 +1,57 @@
+div.content-title 
+		h2 文书评查
+		span(class="content-title-info") #{wsfilename}
+div(class="content-body content-exam")
+		div(class="examine-info total")
+			ul.examine-total
+				li#normal-request-total 
+					h3.total-title 一般要求
+					div.total-media
+						div.total-text 
+							span(class="total-text1") 此处评价为
+							span(class="total-text2 good") 良好
+						div.total-chart#normal-request-chart 
+					div.total-footer 您还有 <span class="total-footer-number completed"> 0 </span> 项信息等待填写
+				li#facts-total
+					h3.total-title 事实叙述
+					div.total-media
+						div.total-text 
+							span(class="total-text1") 此处评价为
+							span(class="total-text2 unkonw") 未知
+						div.total-chart#facts-chart 
+					div.total-footer 您还有 <span class="total-footer-number incompleted"> 2 </span> 项信息等待填写
+				li#evidence-total
+					h3.total-title 证据采纳与采信
+					div.total-media
+						div.total-text 
+							span(class="total-text1") 此处评价为
+							span(class="total-text2 unkonw") 未知
+						div.total-chart#evidence-chart 
+					div.total-footer 您还有 <span class="total-footer-number incompleted"> 3 </span> 项信息等待填写
+				li#reason-total
+					h3.total-title 裁判理由
+					div.total-media
+						div.total-text 
+							span(class="total-text1") 此处评价为
+							span(class="total-text2 excellent") 优秀
+						div.total-chart#reason-chart 
+					div.total-footer 您还有 <span class="total-footer-number completed"> 0 </span> 项信息等待填写
+				li#result=total
+					h3.total-title 裁判结果
+					div.total-media
+						div.total-text 
+							span(class="total-text1") 此处评价为
+							span(class="total-text2 fair") 中等
+						div.total-chart#result-chart 
+					div.total-footer 您还有 <span class="total-footer-number completed"> 0 </span> 项信息等待填写
+		div(class="examine-info normal-request")
+		div(class="examine-info facts")
+		div(class="examine-info evidence")
+		div(class="examine-info reason")
+		div(class="examine-info result")
+
+		
+
+		
+			
+		

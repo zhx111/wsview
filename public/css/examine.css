@@ -1,0 +1,105 @@
+.content-body.content-exam{
+	min-height: 722px;
+	border-bottom:1px solid #aaa;
+	position: relative;
+	width: 100%;
+	background-color: #eee;
+	padding-top:40px; 
+}
+
+.examine-info{
+	min-height: 184px;
+	width: 90%;
+	margin:0 auto;
+	margin-bottom: 40px;
+	background-color: #fff;
+	border:1px solid #e0e0e0;
+}
+
+.examine-total{
+	padding-top:12px; 
+}
+
+.examine-total li{
+	box-sizing: border-box;
+	display: inline-block;
+	border-right: 1px solid #e0e0e0;
+	width: 20%;
+	position: relative;
+	padding-left: 18px; 
+
+}
+
+.total-title{
+	color:#86878D;
+	font-size: 22px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	margin-top: 0px
+}
+
+.total-text{
+	display: inline-block;
+	width: 50%;
+}
+
+.total-text1,.total-footer{
+	font-size: 14px;
+	color: #2B82BE;
+	display: block;
+}
+
+.total-text2{
+	font-size: 26px;
+	display: inline-block;
+	margin: 10px 0 20px 17px;
+}
+
+.total-chart{
+	width: 120px;
+	height: 120px;
+	position: absolute;
+	right: -2px;
+	top:20;
+}
+
+.total-text2.good{
+	color: #7ED321;
+}
+
+.total-text2.unkonw{
+	color:#F6A623;
+}
+
+.total-text2.excellent{
+	color:#FF435A;
+}
+
+.total-text2.fair{
+	color:#8B572A;
+}
+
+.total-text2.poor{
+	color:#4A4A4A;
+}
+
+.total-footer{
+	margin-top:5px;
+}
+
+.total-footer-number{
+	font-size: 22px;
+	font-weight: 300;
+	margin-left: 2px;
+}
+
+.total-footer-number.completed{
+	color: #7ED321;
+}
+
+.total-footer-number.incompleted{
+	color:#DD041E;
+}
+
+
+

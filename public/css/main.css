@@ -1,8 +1,15 @@
-body{
+body,ul,div{
 	margin: 0 auto;
-	padding: 0 auto;
-	background-color: #ddd;
+	padding: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "hiragino sans gb", "microsoft yahei", sans-serif;
+}
+
+body{
+	background-color: #ddd;
+}
+
+li{
+	list-style-type: none;
 }
 
 nav {
@@ -11,8 +18,8 @@ nav {
 	width:300px;
 	color: #fff;
 	float: left;
-	position: fixed;
-	top: 0;
+	/*position: fixed;
+	top: 0;*/
 }
 
 .nav-title{
@@ -32,10 +39,10 @@ nav {
 }
 
 .catalog {
-	list-style-type: none;
 	margin: 50px 0 0 30px;
 	font-size: 20px;
 	font-weight: bold;
+	padding-left: 40px;
 }
 
 .catalog li {
@@ -90,7 +97,6 @@ nav {
 .content-body{
 	height: 722px;
 	border-bottom:1px solid #aaa;
-	overflow: scroll;
 	position: relative;
 	width: 100%;
 	background-color: #eee;

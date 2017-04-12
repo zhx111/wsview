@@ -82,16 +82,13 @@ function sendMassage(url,filename,name){
 		xhr.onreadystatechange = function(){
 			if (xhr.readyState === 4) {
 				if ((xhr.status>=200&&xhr.status<300)||xhr.status==304){
-					xmlcontent=eval('('+xhr.response+')');
-					resolve(xmlcontent,name);
+					resolve([xhr.response,name]);
 				}else{
 					reject(new Error(this.statusText));
 				}
 			}
 		}
 	});
-	
-	
 }
 
 function handleNav() {
@@ -99,10 +96,15 @@ function handleNav() {
 	navArray.forEach(function(item,index){
 		var id = item.id;
 		var text = item.innerText;
-		item.addEventListener('click',function(){
+		item.addEventListener('click',function(e){
 			setTitle(text);
 			var filename = $('.catalog>li').data('wsfilename');
-			sendMassage('/ws',filename,id).then(setContent).catch(function(error){console.error(error)});
+			if (id === 'examine') {
+				//将setExamine方法写在examine.js文件中
+				sendMassage('/examine',filename,id).then(setExamine).catch(function(error){console.error(error)});
+			}else {
+				sendMassage('/ws',filename,id).then(setContent).catch(function(error){console.error(error)});
+			}
 		},false);
 	});
 	//单独处理全文节点
@@ -112,13 +114,17 @@ function handleNav() {
 	qw.addEventListener('click',function(){
 		 setTitle('全文');
 		 $('.node-info').html('');
+		 $('.content-body').removeClass('content-exam');
 		 $('.content-body').height(722).html('<div class="content-body-main format-title">'+util.store('QW')+'</div><div class="items-list"></div>');
 		 $('.content-body-main').height(600);
 	});
 }
 
-function setContent(xmlcontent,name){
+function setContent(args){
+	xmlcontent = JSON.parse(args[0]);
+	name=args[1];
 	var partHtml = util.formatValue(xmlcontent.value);
+	$('.content-body').removeClass('content-exam');
 	$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div><div class='items-list'></div>");
 	$('.content-body-main').height(400);
 	if (name === 'WS') {

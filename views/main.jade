@@ -1,23 +1,11 @@
 html
 	head
-		title 文书可视化_全文
+		title 文书可视化
 		<script src="https://use.fontawesome.com/b6bb42f8e7.js"></script>
 		link(rel="stylesheet",type="text/css",href="static/css/main.css")
+		link(rel="stylesheet",type="text/css",href="static/css/examine.css")
 	body
-		nav
-			div.nav-title
-				h2 文书可视化
-			ul.catalog
-				li(data-wsfilename="#{wsfilename}")  
-					<i class="fa fa-file-text-o" aria-hidden="true"></i> #{writ.QW.nameCN}
-				- var catalog1 = Object.keys(writ.QW);
-				- var itemNum = catalog1.length>=9 ? 9 : catalog1.length;
-				- var icons = ['fa-sort-amount-asc','fa-users','fa-sticky-note-o','fa-book','fa-comments-o','fa-gavel','fa-sort-amount-asc fa-flip-vertical'];
-				- for(let i = 2;i<itemNum;i++){
-					li 
-						a(id="#{catalog1[i]}" href="javascript:void(0)") 
-							<i class="fa #{icons[i-2]}" aria-hidden="true"></i> #{writ.QW[catalog1[i]].nameCN}
-				- }
+		include includes/nav.jade
 		div.content
 			div.content-title 
 				h2 全文
@@ -34,8 +22,17 @@ html
 		)
 		script(
 			type="text/javascript"
+			src="static/js/echarts.common.min.js"
+		)
+		script(
+			type="text/javascript"
 			src="static/js/main.js"
 		)
+		script(
+			type="text/javascript"
+			src="static/js/examine.js"
+		)
+
 		
 			
 		

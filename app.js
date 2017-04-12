@@ -64,7 +64,7 @@ app.post('/upload',function(req,res){
 
 });
 
-app.use('/wsjx',function(req,res,next){
+app.post('/wsjx',function(req,res,next){
 	var filename = req.body.filename;
 	if (filename!==undefined) {
 		fs.readFile(__dirname+'/public/files/'+filename,function(err,data){
@@ -126,6 +126,34 @@ app.use('/ws',function(req,res,next){
 		}
 		
 	});
+});
+
+app.use('/examine',function(req,res,next){
+	var filename = req.query.filename;
+	if (filename!==undefined) {
+		fs.readFile(__dirname+'/public/files/'+filename,function(err,data){
+		if(err) throw err;
+		var xmlcontent = data.toString('utf-8');
+		var xmlobject=xmlparser.toJson(xmlcontent,{object:true});
+		if(!xmlobject.writ&&xmlobject.QW){
+			xmlobject["writ"]={"QW":xmlobject.QW};
+		}
+		var xmlQWvalue;
+		if (xmlobject.writ.QW.value.indexOf('\n')!=-1) {
+			xmlQWvalue=xmlobject.writ.QW.value.split("\n");
+		}else {
+			xmlQWvalue=xmlobject.writ.QW.value.split(" ");
+		}
+		if (xmlQWvalue[0]==="") {
+			xmlQWvalue.splice(0,1);
+		}
+		xmlobject['xmlQWvalue']=xmlQWvalue;
+		xmlobject['wsfilename']=filename;
+		res.render('examine',xmlobject);
+		});
+	}else {
+		res.send(error);
+	}
 });
 
 app.listen(3000,function(){
