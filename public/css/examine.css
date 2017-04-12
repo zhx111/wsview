@@ -1,4 +1,5 @@
 .content-body.content-exam{
+	height: inherit;
 	min-height: 722px;
 	border-bottom:1px solid #aaa;
 	position: relative;
@@ -30,7 +31,7 @@
 
 }
 
-.total-title{
+.total-title,.items-title{
 	color:#86878D;
 	font-size: 22px;
 	font-weight: normal;
@@ -99,6 +100,12 @@
 
 .total-footer-number.incompleted{
 	color:#DD041E;
+}
+
+.items-title{
+	margin-top: 12px;
+	margin-left: 20px;
+	
 }
 
 
