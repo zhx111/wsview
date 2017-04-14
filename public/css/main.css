@@ -1,4 +1,4 @@
-body,ul,div{
+body,ul{
 	margin: 0 auto;
 	padding: 0;
 	font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "hiragino sans gb", "microsoft yahei", sans-serif;
@@ -18,8 +18,8 @@ nav {
 	width:300px;
 	color: #fff;
 	float: left;
-	/*position: fixed;
-	top: 0;*/
+	position: fixed;
+	top: 0;
 }
 
 .nav-title{

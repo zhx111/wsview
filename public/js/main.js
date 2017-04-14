@@ -115,7 +115,11 @@ function handleNav() {
 		 setTitle('全文');
 		 $('.node-info').html('');
 		 $('.content-body').removeClass('content-exam');
-		 $('.content-body').height(722).html('<div class="content-body-main format-title">'+util.store('QW')+'</div><div class="items-list"></div>');
+		 $('.content-body').height(722)
+		 .html('<div class="content-body-main format-title">'+util.store('QW')+'</div><div class="items-list"></div>')
+		 if (!document.querySelector('.node-info')) {
+		 	$('.content-body').after('<div class="node-info"></div>');
+		 }
 		 $('.content-body-main').height(600);
 	});
 }
@@ -125,7 +129,12 @@ function setContent(args){
 	name=args[1];
 	var partHtml = util.formatValue(xmlcontent.value);
 	$('.content-body').removeClass('content-exam');
-	$('.content-body').height(400).html("<div class='content-body-main'>"+partHtml+"</div><div class='items-list'></div>");
+	$('.content-body').height(400)
+	.html('<div class="content-body-main">'+partHtml+'</div><div class="items-list"></div>')
+	 if (!document.querySelector('.node-info')) {
+		 	$('.content-body').after('<div class="node-info"></div>');
+	}
+
 	$('.content-body-main').height(400);
 	if (name === 'WS') {
 		$('.content-body-main').addClass('format-title');
