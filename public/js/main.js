@@ -152,14 +152,20 @@ handleNav();
 
 function renderSecondLevel(xmlcontent) {
 	//console.log(xmlcontent);
+	//初始化第二层节点的展示按钮外层框架
 	document.querySelector('.node-info').innerHTML='<div class="second-level"></div>';
 	var rootHook = document.querySelector('.second-level');
 	rootHook.innerHTML='<button class="prev"><</button><div class="list"><div class="track"></div></div><button class="next">></button>';
 	var trackList = document.querySelector('.track'); 
+
 	var secCatalogs = Object.keys(xmlcontent);
+	if (secCatalogs === null) {
+		return;
+	}
 	//console.log(secCatalogs);
 	//初始化第二层节点的数目
 	var listNum = 0 ;
+	//初始化第二层节点的展示按钮
 	for (var i = 2; i < secCatalogs.length; i++) {
 		//console.log(xmlcontent[secCatalogs[i]] instanceof Array);
 		var xmlSecContent = xmlcontent[secCatalogs[i]];

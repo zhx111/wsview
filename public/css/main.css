@@ -18,8 +18,8 @@ nav {
 	width:300px;
 	color: #fff;
 	float: left;
-	position: fixed;
-	top: 0;
+/*	position: fixed;
+	top: 0;*/
 }
 
 .nav-title{
@@ -98,6 +98,7 @@ nav {
 	height: 722px;
 	border-bottom:1px solid #aaa;
 	position: relative;
+	overflow: scroll;
 	width: 100%;
 	background-color: #eee;
 }

@@ -31,6 +31,10 @@
 
 }
 
+.examine-total li:nth-child(5){
+	border: none;
+}
+
 .total-title,.items-title{
 	color:#86878D;
 	font-size: 22px;
@@ -103,10 +107,53 @@
 }
 
 .items-title{
-	margin-top: 12px;
-	margin-left: 20px;
-	
+	padding: 12px 12px;
+	margin:0px 8px;
+	border-bottom: 1px solid #e0e0e0; 
 }
+
+.table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 95%;
+	max-width: 95%;
+	box-sizing: border-box;
+	color:#7A7B81;
+	margin:0 auto;
+}
+
+.table td{
+	padding: 8px;
+	line-height: 1.42;
+	vertical-align: middle;
+	border-top:1px solid #e0e0e0; 
+}
+
+.table tr td:nth-child(3){
+	 text-align: center;
+}
+
+.table .first td{
+	border: none;
+}
+
+.table .square {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+}
+
+.square.correct {
+	background-color: #7ED321;
+}
+
+.square.incorrect {
+	background-color: #EB534F;
+}
+
+
+
+
 
 
 
