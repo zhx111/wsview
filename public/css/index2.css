@@ -31,6 +31,22 @@ body{
 	color: #fff;
 }
 
+.right-button{
+	float: right;
+	color: #fff;
+	margin-right: 20px;
+	line-height: 60px;
+}
+
+.right-button:hover{
+	color: rgba(255,255,255,0.8);
+	cursor: pointer;
+}
+
+.right-button:active{
+	line-height: 62px;
+}
+
 .main-content {
 	background-color: #1896df;
 	padding-top: 50px;

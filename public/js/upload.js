@@ -16,6 +16,12 @@ jQuery(function() {
 			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
 			pick : '#picker'
 		});
+		//样例文件展示
+		var butt = document.querySelector('.right-button');
+		butt.onclick = function(e){
+			$("#filename").val('黄志强与王振机动车交通事故责任纠纷一审民事判决书.docx.xml');
+			$("#jx").submit();
+		}
 
 		// 当有文件添加进来的时候
 		uploader.on('fileQueued', function(file) {
@@ -36,7 +42,6 @@ jQuery(function() {
 		uploader.on('uploadSuccess', function(file, response) {
 			//$('#' + file.id).find('p.state').text('已上传');
 			wsnr=response;
-			console.log(wsnr);
 			$("#jx").submit();
 		});
 

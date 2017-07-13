@@ -9,7 +9,8 @@ html
 		div.content
 			div.content-title 
 				h2 全文
-				span(class="content-title-info") #{wsfilename}
+				- var filename = wsfilename.substring(0,wsfilename.indexOf("."));
+				span(class="content-title-info") #{filename}
 			div.content-body
 				div.content-body-main.format-title
 					- for(let i = 0 ;i<xmlQWvalue.length;i++){

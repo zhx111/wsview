@@ -54,7 +54,8 @@ div(class="content-body content-exam")
 						span 法院名称准确
 					td 
 						span 没有问题
-					td 
+					td
+						span 10分
 					td 
 						span 查看
 					td 
@@ -66,7 +67,8 @@ div(class="content-body content-exam")
 						span 文书种类准确
 					td 
 						span 文书种类和结案方式类型不一致
-					td 
+					td
+						span 0分
 					td 
 						span 查看
 					td 
@@ -74,6 +76,40 @@ div(class="content-body content-exam")
 
 		div(class="examine-info facts")
 			h3.items-title 事实叙述
+			table.table
+				tr.first
+					td
+						span(class="square unkonw")
+					td
+						span （刑事）被告人犯罪动机、目的、过程、危害结果等事实表述清晰
+					td
+						span(class="waiting show unkonw") 等待评价
+						span(class="writing hide") 
+							input(type="text" placeholder="请输入你的评价" name="evaluation")
+						span(class="wrote hide") 
+						span(class="warning hide")
+					td
+						span -分
+					td
+						button(class="button-evaluate unkonw") 立即评价
+					td
+						span 查看
+					td
+						img(src="static/img/文书评查图标/注意.png" alt="unkonwn")
+				tr
+					td 
+						span(class="square incorrect")
+					td 
+						span 文书种类准确
+					td 
+						span 文书种类和结案方式类型不一致
+					td
+					td
+						span 0分
+					td 
+						span 查看
+					td 
+						img(src="static/img/文书评查图标/警示.png" alt="incorrect")
 		div(class="examine-info evidence")
 			h3.items-title 证据采纳与采信
 		div(class="examine-info reason")

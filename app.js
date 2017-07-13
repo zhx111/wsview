@@ -20,22 +20,15 @@ app.get('/',function(req,res) {
 });
 
 app.post('/upload',function(req,res){
-
 	var fileStream,data;
-	//console.log(req.busboy);
 	if(req.busboy){
-		//req.pipe(req.busboy);
 		req.busboy.on('file',function(fieldname,file,filename,encoding,mimetype){
 			console.log("uploading:"+filename);
 			console.log("encoding:"+encoding);
 			console.log("mimetype:"+mimetype);
-			//console.log(file);
 			//创建文件
 			fs.open(__dirname+'/public/files/' + filename,"w",function(err,fd){
-				if (err) {
-       				return console.error(err);
-   				}
-  				//console.log("文件打开成功！");
+				if (err) { return console.error(err); }
   				fs.close(fd,function(err){
   					if (err) {
        					return console.error(err);
@@ -52,7 +45,6 @@ app.post('/upload',function(req,res){
 				data+=chunk;
 			});
 			file.on('end',function(){
-				//console.log(data);
 				res.send(data);
 			});
 			file.on('error',function(err){
@@ -70,7 +62,6 @@ app.post('/wsjx',function(req,res,next){
 		fs.readFile(__dirname+'/public/files/'+filename,function(err,data){
 		if(err) throw err;
 		var xmlcontent = data.toString('utf-8');
-		//console.log(xmlparser.toJson(xmlcontent));
 		var options = {
 		    object: true,
 		    reversible: false,
@@ -80,7 +71,6 @@ app.post('/wsjx',function(req,res,next){
 		    arrayNotation: false
 		};
 		var xmlobject=xmlparser.toJson(xmlcontent,options);
-		//console.log(xmlobject.writ.QW.value);
 		if(!xmlobject.writ&&xmlobject.QW){
 			xmlobject["writ"]={"QW":xmlobject.QW};
 		}
@@ -94,9 +84,8 @@ app.post('/wsjx',function(req,res,next){
 			xmlQWvalue.splice(0,1);
 		}
 		xmlobject['xmlQWvalue']=xmlQWvalue;
-		//console.log(xmlQWvalue);
+		var filename2 = filename.substring(0,filename.indexOf("."));
 		xmlobject['wsfilename']=filename;
-		//console.log(xmlQWvalue);
 		res.render('main',xmlobject);
 		});
 	}else {
